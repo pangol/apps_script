@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      function onSuccess(){
+        alert("저장 완료")
+      }
+      function register(){
+        let inputEl = document.getElementsByTagName("input");
+        let inputData = [];
+        for(element of inputEl) {
+          inputData.push(element.value)
+        }
+        google.script.run.withSuccessHandler(onSuccess).sendUserData(inputData)
+      }
+    </script>
+  </head>
+  <body>
+    <h1>냉장고 자재 관리 프로그램</h1>
+    <label>종류</label>
+    <input type="text" name="type">
+    <br>
+    <label>수량</label>
+    <input type="number" name="number">
+    <br>
+    <label>유효기간</label>
+    <input type="date" name="deadline">
+    <br>
+    <button onclick="register()">등록</button>
+  </body>
+</html>
