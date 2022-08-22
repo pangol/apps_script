@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <label>발행할 행</label>
+    <input type="number" name="row">
+    <br>
+    <button onclick="run()">실행</button>
+    <script>
+      function run(){
+        let inputEl = document.getElementsByTagName("input");
+        let row = inputEl[0].value
+        google.script.run.withSuccessHandler(onSuccess).makeDoc(row)
+      }
+
+      function onSuccess(){
+        alert("저장 완료")
+      }
+
+    </script>
+  </body>
+</html>

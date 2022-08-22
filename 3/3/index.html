@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <style>
+      canvas {border: 1px solid black;}
+    </style>  
+  </head>
+  <body>
+    <h1>후원자 서명 프로그램</h1>
+    <label>이름</label>
+    <input type="text" name="name">
+    <br>
+    <label>주소</label>
+    <input type="text" name="addr">
+    <br>
+    <label>핸드폰</label>
+    <input type="tel" name="phone">
+    <br>
+    <label>이메일</label>
+    <input type="email" name="email">
+    <br>
+    <canvas></canvas>
+    <button onclick="register()">등록</button>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script>
+      let canvas = document.querySelector("canvas");
+      let signaturePad = new SignaturePad(canvas);
+
+      function register(){
+        let inputData = readInputData()     
+        let sigPng = signaturePad.toDataURL()
+        inputData.push(sigPng)
+        google.script.run.withSuccessHandler(onSuccess).sendUserData(inputData)
+      }
+
+      function readInputData(){
+        let inputEl = document.getElementsByTagName("input");
+        let inputData = [];
+        for(element of inputEl) {
+          inputData.push(element.value)
+        }
+        return inputData
+      }
+
+      function onSuccess(){
+        alert("저장 완료")
+      }
+      
+    </script>
+   
+  </body>
+</html>
